@@ -6,6 +6,13 @@
 #include "GameFramework/Character.h"
 #include "StormLinkCharacter.generated.h"
 
+UENUM(BlueprintType)
+enum class ECameraPerspective : uint8
+{
+	FirstPersonPerspective,
+	ThirdPersonPerspective
+};
+
 UCLASS(config=Game)
 class AStormLinkCharacter : public ACharacter
 {
@@ -33,6 +40,7 @@ protected:
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
+	void TurnAtRateAndMatchController(float Rate);
 	/** 
 	 * Called via input to turn at a given rate. 
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate

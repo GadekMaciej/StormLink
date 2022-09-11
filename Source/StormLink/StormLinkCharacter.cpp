@@ -67,7 +67,7 @@ void AStormLinkCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-	PlayerInputComponent->BindAxis("Turn Right / Left Mouse", this, &APawn::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("Turn Right / Left Mouse", this, &AStormLinkCharacter::TurnAtRateAndMatchController);
 	PlayerInputComponent->BindAxis("Turn Right / Left Gamepad", this, &AStormLinkCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("Look Up / Down Mouse", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("Look Up / Down Gamepad", this, &AStormLinkCharacter::LookUpAtRate);
@@ -126,4 +126,15 @@ void AStormLinkCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void AStormLinkCharacter::TurnAtRateAndMatchController(float Rate)
+{
+	AddControllerYawInput(Rate);
+	
+	// // make character rotate together with controller
+	// const APlayerController* PC = CastChecked<APlayerController>(Controller);
+	// FRotator NewRotation = GetActorRotation();
+	// NewRotation.Yaw = PC->GetControlRotation().Yaw;
+	// SetActorRotation(NewRotation);
 }
