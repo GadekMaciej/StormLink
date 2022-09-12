@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "SLProjectileBase.h"
-
 #include "SLProjectileSpawnComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=(Projectile), meta=(BlueprintSpawnableComponent) )
@@ -31,7 +30,7 @@ public:
 	* @return if success
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Projectile")
-	bool SpawnProjectile(const FVector& Location, const FRotator& Rotation);
+	ASLProjectileBase* SpawnProjectile(const FVector& Location, const FRotator& Rotation);
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile", meta=(AllowPrivateAccess="true"))

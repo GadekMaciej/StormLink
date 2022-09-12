@@ -30,18 +30,18 @@ void USLProjectileSpawnComponent::TickComponent(float DeltaTime, ELevelTick Tick
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-bool USLProjectileSpawnComponent::SpawnProjectile(const FVector& Location, const FRotator& Rotation)
+ASLProjectileBase* USLProjectileSpawnComponent::SpawnProjectile(const FVector& Location, const FRotator& Rotation)
 {
 	if (!SpawnedProjectileClass)
 	{
-		return false;
+		return nullptr;
 	}
 
 	UWorld* world = GetWorld();
 	
 	if (!world)
 	{
-		return false;
+		return nullptr;
 	}
 
 	FActorSpawnParameters SpawnParams;
@@ -50,7 +50,7 @@ bool USLProjectileSpawnComponent::SpawnProjectile(const FVector& Location, const
 	// we should cache the result instead of casting everytime - but this is temporary anyways, until we add guns
 	SpawnParams.Instigator = CastChecked<APawn>(GetOwner());
 
-	world->SpawnActor(SpawnedProjectileClass, &Location, &Rotation, SpawnParams);
-	return true;
+	ASLProjectileBase* SpawnedProjectile = CastChecked<ASLProjectileBase>(world->SpawnActor(SpawnedProjectileClass, &Location, &Rotation, SpawnParams));
+	return SpawnedProjectile;
 }
 
