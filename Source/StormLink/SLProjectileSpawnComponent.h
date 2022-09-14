@@ -30,7 +30,7 @@ public:
 	* @return if success
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Projectile")
-	ASLProjectileBase* SpawnProjectile(const FVector& Location, const FRotator& Rotation);
+	ASLProjectileBase* SpawnProjectile(const FVector& Location, const FRotator& Rotation, TSubclassOf<ASLProjectileBase> ProjectileOverrideClass);
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile", meta=(AllowPrivateAccess="true"))
